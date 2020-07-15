@@ -32,7 +32,8 @@ spec:
         dnsPolicy: ClusterFirst
         securityContext:
             privileged: true
-            runAsUser: 0
+            runAsUser: RunAsAny
+        serviceAccount: kindroot
         serviceAccountName: kindroot
   triggers:
     - type: ConfigChange
