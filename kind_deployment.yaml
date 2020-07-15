@@ -26,13 +26,20 @@ spec:
       - image: 'alpine:3.12.0'
         name: kind-server
         imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+              - echo
+              - ok
+          failureThreshold: 3
+          initialDelaySeconds: 180
+          periodSeconds: 1
+          successThreshold: 1
+          timeoutSeconds: 10
         resources:
           requests:
             memory: 512Mi
         dnsPolicy: ClusterFirst
-        securityContext:
-            privileged: true
-            runAsUser: RunAsAny
         serviceAccount: kindroot
         serviceAccountName: kindroot
   triggers:
