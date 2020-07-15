@@ -1,0 +1,38 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: kind-server
+  name: kind-server
+  namespace: ok-kind-test
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: kind-server
+  strategy:
+    activeDeadlineSeconds: 21600
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kind-server
+        name: kind-server
+    spec:
+      containers:
+      - image: 'alpine:3.12.0'
+        name: kind-server
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 512Mi
+        dnsPolicy: ClusterFirst
+        securityContext:
+            privileged: true
+            runAsUser: 0
+        serviceAccountName: kindroot
+  triggers:
+    - type: ConfigChange
