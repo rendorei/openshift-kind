@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kind-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: kind-server
+  template:
+    metadata:
+      labels:
+        name: kind-server
+    spec:
+      serviceAccountName: kindroot
+      securityContext:
+        runAsNonRoot: true
+      containers:
+        - name: kind-server
+          # Replace this with the built image name
+          image: 'alpine:3.12.0'
+          command:
+            - echo
+            - ok
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
