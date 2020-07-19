@@ -27,7 +27,7 @@ spec:
         name: kind-server
         imagePullPolicy: Always
         command: ["/bin/bash"]
-        args: ["-c", "sudo apt update -y && apt upgrade -y; apt install curl; curl --version; sleep 40; curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.8.1/kind-$(uname)-amd64; chmod +x ./kind; mv ./kind /$(PATH)/kind; curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl; chmod +x ./kubectl; sudo mv ./kubectl /usr/local/bin/kubectl; kubectl version --client; kind create cluster"]
+        args: ["-c", "su -; apt update -y && apt upgrade -y; apt install curl; curl --version; sleep 40; curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.8.1/kind-$(uname)-amd64; chmod +x ./kind; mv ./kind /$(PATH)/kind; curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl; chmod +x ./kubectl; sudo mv ./kubectl /usr/local/bin/kubectl; kubectl version --client; kind create cluster"]
         livenessProbe:
           exec:
             command:
